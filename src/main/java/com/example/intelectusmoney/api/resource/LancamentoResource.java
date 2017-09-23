@@ -26,6 +26,7 @@ import com.example.intelectusmoney.api.event.RecursoCriadoEvent;
 import com.example.intelectusmoney.api.exceptionhandler.Erro;
 import com.example.intelectusmoney.api.model.Lancamento;
 import com.example.intelectusmoney.api.repository.LancamentoRepository;
+import com.example.intelectusmoney.api.repository.filter.LancamentoFilter;
 import com.example.intelectusmoney.api.service.LancamentoService;
 import com.example.intelectusmoney.api.service.PessoaService;
 import com.example.intelectusmoney.api.service.exception.PessoaInexistenteOuInativaException;
@@ -47,8 +48,8 @@ public class LancamentoResource {
 	private MessageSource messageSource;
 
 	@GetMapping
-	public List<Lancamento> listar(){
-		return lancamentoRepository.findAll();
+	public List<Lancamento> pesquisar(LancamentoFilter lancamentoFilter){
+		return lancamentoRepository.filtrar(lancamentoFilter);
 	}
 	@GetMapping("/buscarLancamentoPorCodigo/{codigo}")
 	public ResponseEntity<Lancamento> buscarPeloCodigoRetorno(@PathVariable Long codigo){
