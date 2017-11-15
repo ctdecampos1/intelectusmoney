@@ -24,13 +24,27 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {																//quantos segundos o token fica ativo
-		clients.inMemory().withClient("angular").secret("@ngul@r0").scopes("read","write").authorizedGrantTypes("password").accessTokenValiditySeconds(1800);
+		clients.inMemory()
+		.withClient("angular")
+		.secret("@ngul@r0")
+		.scopes("read","write")
+		.authorizedGrantTypes("password", "refresh_token")
+		.accessTokenValiditySeconds(1800)
+		.refreshTokenValiditySeconds(3600 * 24)
+		.and()
+		.withClient("angular")
+		.secret("m0b1l30")
+		.scopes("read")
+		.authorizedGrantTypes("password", "refresh_token")
+		.accessTokenValiditySeconds(1800)
+		.refreshTokenValiditySeconds(3600 * 24);;
 	}
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
 		endpoints.tokenStore(tokenStore())
 		.accessTokenConverter(accessTokenConverter())
+		.reuseRefreshTokens(false)
 		.authenticationManager(authenticationManager);
 	}
 
