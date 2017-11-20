@@ -1,3 +1,4 @@
+
 package com.example.intelectusmoney.api.cors;
 
 import java.io.IOException;
@@ -12,18 +13,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import com.example.intelectusmoney.api.config.property.IntelectusmoneyApiProperty;
+import com.example.intelectusmoney.api.config.property.IntelectusmoneymoneyApiProperty;
 
 @Component
-@Order(org.springframework.core.Ordered.HIGHEST_PRECEDENCE)
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter{
 
 	//private String originPermitida = "http://localhost:8000"; // TODO: Configurar para diferentes ambientes
-	@Autowired
-	private IntelectusmoneyApiProperty intelectusmoneyApiProperty;
+	private IntelectusmoneymoneyApiProperty intelectusmoneyApiProperty;
 
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
