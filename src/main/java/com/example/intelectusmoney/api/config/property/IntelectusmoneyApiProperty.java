@@ -3,9 +3,9 @@ package com.example.intelectusmoney.api.config.property;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-@ConfigurationProperties("algamoney")
-@EnableConfigurationProperties(AlgamoneyApiProperty.class)
-public class AlgamoneyApiProperty {
+@ConfigurationProperties("intelectus")
+@EnableConfigurationProperties(IntelectusmoneyApiProperty.class)
+public class IntelectusmoneyApiProperty {
 
 	private String originPermitida = "http://localhost:8000";
 

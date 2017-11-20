@@ -18,13 +18,13 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import com.example.intelectusmoney.api.config.property.AlgamoneyApiProperty;
+import com.example.intelectusmoney.api.config.property.IntelectusmoneyApiProperty;
 
 @ControllerAdvice                                                    //quando o response for do tipo abaixo, Tipo do dado que eu quero q seja interceptado quando estiver voltando
 public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2AccessToken>{
 
 	@Autowired
-	private AlgamoneyApiProperty algamoneyApiProperty;
+	private IntelectusmoneyApiProperty algamoneyApiProperty;
 	@Override
 	public OAuth2AccessToken beforeBodyWrite(OAuth2AccessToken body, MethodParameter returnType, MediaType selectedContentType,
 			Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {

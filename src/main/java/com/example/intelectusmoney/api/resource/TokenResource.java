@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.intelectusmoney.api.config.property.AlgamoneyApiProperty;
+import com.example.intelectusmoney.api.config.property.IntelectusmoneyApiProperty;
 
 @RestController
 @RequestMapping("/tokens")
 public class TokenResource {
 
 	@Autowired
-	private AlgamoneyApiProperty algamoneyApiProperty;
+	private IntelectusmoneyApiProperty algamoneyApiProperty;
 
 	//Para invalidar o token
 	@DeleteMapping("/revoke")
