@@ -29,7 +29,7 @@ public class CorsFilter implements Filter{
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
-		HttpServletRequest request = (HttpServletRequest) req;
+ 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		//os dois precisam ser enviados os dois abaixo
 		response.setHeader("Access-Control-Allow-Origin", intelectusmoneyApiProperty.getOriginPermitida());
