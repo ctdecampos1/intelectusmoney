@@ -10,6 +10,6 @@ import org.springframework.context.annotation.ComponentScan;
 public class IntelectusmoneyApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(IntelectusmoneyApiApplication.class, args) ;
+		SpringApplication.run(IntelectusmoneyApiApplication.class, args);
 	}
 }
