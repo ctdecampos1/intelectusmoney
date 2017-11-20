@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -17,9 +18,13 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import com.example.intelectusmoney.api.config.property.AlgamoneyApiProperty;
+
 @ControllerAdvice                                                    //quando o response for do tipo abaixo, Tipo do dado que eu quero q seja interceptado quando estiver voltando
 public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2AccessToken>{
 
+	@Autowired
+	private AlgamoneyApiProperty algamoneyApiProperty;
 	@Override
 	public OAuth2AccessToken beforeBodyWrite(OAuth2AccessToken body, MethodParameter returnType, MediaType selectedContentType,
 			Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
@@ -42,7 +47,7 @@ public class RefreshTokenPostProcessor implements ResponseBodyAdvice<OAuth2Acces
 	private void adicionarRefreshTokenCookie(String refreshToken, HttpServletRequest req, HttpServletResponse resp) {
 		Cookie refreshTokenCookie = new Cookie("refreshToken", refreshToken);
 		refreshTokenCookie.setHttpOnly(true);
-		refreshTokenCookie.setSecure(false);//TODO: Mudar para true em produção
+		refreshTokenCookie.setSecure(algamoneyApiProperty.getSeguranca().isEnableHttps());//TODO: Mudar para true em produção
 		refreshTokenCookie.setPath(req.getContextPath()+ "/oauth/token");
 		refreshTokenCookie.setMaxAge(2892000); //tempo máximo do cookie
 		resp.addCookie(refreshTokenCookie);

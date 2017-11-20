@@ -11,24 +11,30 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import com.example.intelectusmoney.api.config.property.AlgamoneyApiProperty;
 
 @Component
 @Order(org.springframework.core.Ordered.HIGHEST_PRECEDENCE)
 public class CorsFilter implements Filter{
 
-	private String originPermitida = "http://localhost:8000"; // TODO: Configurar para diferentes ambientes
+	//private String originPermitida = "http://localhost:8000"; // TODO: Configurar para diferentes ambientes
+	@Autowired
+	private AlgamoneyApiProperty algamoneyApiProperty;
+
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		//os dois precisam ser enviados os dois abaixo
-		response.setHeader("Access-Control-Allow-Origin", originPermitida);
+		response.setHeader("Access-Control-Allow-Origin", algamoneyApiProperty.getOriginPermitida());
 		response.setHeader("Access-Control-Allow-Credentials", "true"); //Para o cookie ser enviado
 													//origin permitida for igual a origin do browser
-		if("OPTIONS".equals(request.getMethod()) && originPermitida.equals(request.getHeader("Origin"))) {
+		if("OPTIONS".equals(request.getMethod()) && algamoneyApiProperty.getOriginPermitida().equals(request.getHeader("Origin"))) {
 			response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
 			response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
 			response.setHeader("Access-Control-Max-Age", "3600"); //Tempo que o browser fará uma novo requisição 1h
